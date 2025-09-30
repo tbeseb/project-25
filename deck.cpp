@@ -3,6 +3,8 @@
 #include <random>
 #include <ctime>
 
+using namespace std;
+
 Deck::Deck() {
     for (int suit = 0; suit < 4; ++suit) {
         for (int rank = 2; rank <= 14; ++rank) {
@@ -12,20 +14,20 @@ Deck::Deck() {
 }
 
 void Deck::shuffle() {
-    std::random_device rd;
-    std::mt19937 rng(static_cast<unsigned int>(std::time(nullptr)));
-    std::shuffle(cards.begin(), cards.end(), rng);
+    random_device rd;
+    mt19937 rng(static_cast<unsigned int>(time(nullptr)));
+    shuffle(cards.begin(), cards.end(), rng);
 }
 
-Card dealCard() {
+Card Deck::dealCard() {
     if (cards.empty()) {
-        throw std::out_of_range("No cards left in the deck");
+        throw out_of_range("No cards left in the deck");
     }
         Card topCard = cards.back();
         cards.pop_back();
         return topCard;
 }
 
-bool isEmpty() const {
+bool Deck::isEmpty() const {
     return cards.empty();
 }
