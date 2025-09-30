@@ -1,4 +1,5 @@
 #include "deck.h"
+#include "main.cpp"
 #include <algorithm>
 #include <random>
 #include <ctime>
@@ -16,7 +17,7 @@ Deck::Deck() {
 void Deck::shuffle() {
     random_device rd;
     mt19937 rng(static_cast<unsigned int>(time(nullptr)));
-    shuffle(cards.begin(), cards.end(), rng);
+    ::shuffle(cards.begin(), cards.end(), rng);
 }
 
 Card Deck::dealCard() {
