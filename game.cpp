@@ -5,7 +5,7 @@
 
 using namespace std;
 
-game::Game() {
+game::game() {
     deck.shuffle();
 }
 
@@ -25,7 +25,7 @@ void game::newRound() {
     player.clearHand();
     dealer.clearHand();
     if (deck.isEmpty()) {
-        deck = deck();
+        deck = Deck();
         deck.shuffle();
     }
 
