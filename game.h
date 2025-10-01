@@ -19,5 +19,5 @@ private:
     Player player;
     Dealer dealer;
     UI ui;
-}
+};
 #endif
