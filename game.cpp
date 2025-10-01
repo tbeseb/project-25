@@ -17,7 +17,11 @@ void game::start() {
         playerTurn();
         dealerTurn();
         determineWinner();
-        keepPlaying = ui.askPlayAgain();
+        
+        char choice;
+        cout << "Play again? (y/n): ";
+        cin >> choice;
+        keepPlaying = (choice =='y' || choice == 'Y');
     }
 }
 
@@ -33,52 +37,46 @@ void game::newRound() {
     dealer.addCard(deck.dealCard());
     player.addCard(deck.dealCard());
     dealer.addCard(deck.dealCard());
+
+    cout << "Dealer shows: " << dealer.getHand()[0].getRank() << endl;
+    cout << Player hand value: " << player.getHandValue() << endl;"
 }
 
 void game::playerTurn() {
-    bool playerBusted = false;
-    while (true) {
-        ui.displayHands(player, dealer, false);
-        if (player.getHandValue() == 21) {
-            cout << "Blackjack! You have 21." << endl;
-            break;
-        }
-        if (player.getHandValue() > 21) {
-            cout << "Bust! You exceeded 21." << endl;
-            playerBusted = true;
-            break;
-        }
-        if (ui.askHitOrStand()) {
+    bool hit = true;
+    while (hit && player.getHandValue() < 21) {
+        cout << "Hit or Stand? (h/s): ";
+        char choice;
+        cin >> choice;
+        if (choice == 'h' || choice == 'H') {
             player.addCard(deck.dealCard());
+            cout << "Player hand value: " << player.getHandValue() << endl;
         } else {
-            break;
+            hit = false;
         }
     }
 }
 
 void game::dealerTurn() {
-   ui.showDealerHand(dealer);
+   cout << "Dealer turn..." << endl;
 
-   while (dealer.getHandValue() < 17) {
-       dealer.addCard(deck.dealCard());
-       ui.showDealerHand(dealer);
-   }
+    while (dealer.getHandValue() < 17) {
+        dealer.addCard(deck.dealCard());
+    }
+    cout << "Dealer hand value: " << dealer.getHandValue() << endl;
 }
-
 void game::determineWinner() {
-    int playerValue = player.getHandValue();
-    int dealerValue = dealer.getHandValue();
+    int playerScore = player.getHandValue();
+    int dealerScore = dealer.getHandValue();
 
-    ui.displayHands(player, dealer, true);
-
-    if (playerValue > 21) {
-        cout << "You busted! Dealer wins." << endl;
-    } else if (dealerValue > 21) {
-        cout << "Dealer busted! You win!" << endl;
-    } else if (playerValue > dealerValue) {
-        cout << "You win!" << endl;
-    } else if (playerValue < dealerValue) {
-        cout << "Dealer wins." << endl;
+    if (playerScore > 21) {
+        cout << "Player busts! Dealer wins." << endl;
+    } else if (dealerScore > 21) {
+        cout << "Dealer busts! Player wins." << endl;
+    } else if (playerScore > dealerScore) {
+        cout << "Player wins!" << endl;
+    } else if (dealerScore > playerScore) {
+        cout << "Dealer wins!" << endl;
     } else {
         cout << "It's a tie!" << endl;
     }

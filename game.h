@@ -4,7 +4,6 @@
 #include "deck.h"
 #include "player.h"
 #include "dealer.h"
-#include "UI.h"
 
 class game{
 public:
@@ -18,6 +17,5 @@ private:
     Deck deck;
     Player player;
     Dealer dealer;
-    UI ui;
 };
 #endif
