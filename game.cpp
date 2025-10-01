@@ -5,11 +5,11 @@
 
 using namespace std;
 
-Game:Game() {
+game::Game() {
     deck.shuffle();
 }
 
-void Game::play() {
+void game::start() {
     bool keepPlaying = true;
 
     while (keepPlaying) {
@@ -21,7 +21,7 @@ void Game::play() {
     }
 }
 
-void Game::newRound() {
+void game::newRound() {
     player.clearHand();
     dealer.clearHand();
     if (deck.isEmpty()) {
@@ -35,7 +35,7 @@ void Game::newRound() {
     dealer.addCard(deck.dealCard());
 }
 
-void Game::playerTurn() {
+void game::playerTurn() {
     bool playerBusted = false;
     while (true) {
         ui.displayHands(player, dealer, false);
@@ -56,7 +56,7 @@ void Game::playerTurn() {
     }
 }
 
-void Game::dealerTurn() {
+void game::dealerTurn() {
    ui.showDealerHand(dealer);
 
    while (dealer.getHandValue() < 17) {
@@ -65,7 +65,7 @@ void Game::dealerTurn() {
    }
 }
 
-void Game::determineWinner() {
+void game::determineWinner() {
     int playerValue = player.getHandValue();
     int dealerValue = dealer.getHandValue();
 
