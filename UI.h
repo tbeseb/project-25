@@ -10,10 +10,11 @@ void displayHand(const std::vector<Card>& hand, const std::string& playerName)
 {
     cout << playerHand << " 's hand:" << endl; 
 
-    
-
-
-
+    for (const auto& card : hand)
+    {
+        cout << card.getRankString() << " of " << card.getSuitString() << ", ";
+    }
+    cout << endl;
 }
 
 
