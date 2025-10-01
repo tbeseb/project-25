@@ -5,9 +5,9 @@
 #include "player.h"
 #include "dealer.h"
 
-class game{
+class Game{
 public:
-    game();
+    Game();
     void start();
     void playerTurn();
     void dealerTurn();

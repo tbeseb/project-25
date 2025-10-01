@@ -5,11 +5,11 @@
 
 using namespace std;
 
-game::game() {
+Game::Game() {
     deck.shuffle();
 }
 
-void game::start() {
+void Game::start() {
     bool keepPlaying = true;
 
     while (keepPlaying) {
@@ -25,7 +25,7 @@ void game::start() {
     }
 }
 
-void game::newRound() {
+void Game::newRound() {
     player.clearHand();
     dealer.clearHand();
     if (deck.isEmpty()) {
@@ -39,10 +39,10 @@ void game::newRound() {
     dealer.addCard(deck.dealCard());
 
     cout << "Dealer shows: " << dealer.getHand()[0].getRank() << endl;
-    cout << Player hand value: " << player.getHandValue() << endl;"
+    cout << "Player hand value: " << player.getHandValue() << endl;
 }
 
-void game::playerTurn() {
+void Game::playerTurn() {
     bool hit = true;
     while (hit && player.getHandValue() < 21) {
         cout << "Hit or Stand? (h/s): ";
@@ -57,7 +57,7 @@ void game::playerTurn() {
     }
 }
 
-void game::dealerTurn() {
+void Game::dealerTurn() {
    cout << "Dealer turn..." << endl;
 
     while (dealer.getHandValue() < 17) {
@@ -65,7 +65,7 @@ void game::dealerTurn() {
     }
     cout << "Dealer hand value: " << dealer.getHandValue() << endl;
 }
-void game::determineWinner() {
+void Game::determineWinner() {
     int playerScore = player.getHandValue();
     int dealerScore = dealer.getHandValue();
 
